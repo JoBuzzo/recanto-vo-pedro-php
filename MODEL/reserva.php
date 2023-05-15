@@ -117,24 +117,23 @@ class Reserva {
 
     
 
-    public function getUltimoDia() : null|string
+    public function getUltimoDia() : string
     {
         return $this->ultimoDia;
     }
 
     public function getUltimoDiaF() : string
     {
-        if($this->ultimoDia == "0000-00-00"){
+        if(!$this->ultimoDia){
             return "";
         }
         return date('d/m/Y', strtotime($this->ultimoDia));
     }
 
-    public function setUltimoDia(string $ultimoDia): void
+    public function setUltimoDia(string $ultimoDia = null): void
     {
-        $this->ultimoDia = $ultimoDia; 
+        $this->ultimoDia = $ultimoDia;
     }
-
 
 }
 
