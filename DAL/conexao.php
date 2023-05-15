@@ -1,5 +1,6 @@
 <?php
-   namespace DAL;
+
+namespace DAL;
 
 class Conexao{
     private static $dbNome='piscina'; 

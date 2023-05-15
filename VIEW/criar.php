@@ -1,3 +1,45 @@
+<?php
+
+require_once '../MODEL/reserva.php';
+require_once '../BLL/ReservaBLL.php';
+require_once '../ENUM/ReservaStatus.php';
+
+use MODEL\Reserva;
+use BLL\ReservaBLL;
+use Enum\ReservaStatus;
+
+
+$bll = new ReservaBLL();
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if ($_POST['status'] == ReservaStatus::CONFIRMADO) {
+        $status = new ReservaStatus('CONFIRMADO');
+    }
+
+    if ($_POST['status'] == ReservaStatus::PENDENTE) {
+        $status = new ReservaStatus('PENDENTE');
+    }
+
+    try {
+        $reserva = new Reserva();
+        $reserva->setNome($_POST['nome']);
+        $reserva->setNumero($_POST['numero']);
+        $reserva->setPago($_POST['pago']);
+        $reserva->setTotalPagar($_POST['valorTotal']);
+        $reserva->setStatus($status);
+
+        $bll->inserir($reserva);
+
+        echo "Reserva inserida com sucesso!";
+    } catch (Exception $e) {
+
+        $errors = explode("\n", $e->getMessage());
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,10 +50,10 @@
     <title>Adicionar Reserva</title>
     <link rel="icon" type="image/png" href="/image/piscina.png" />
 
-    
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    
+
 </head>
 
 <body>
@@ -70,32 +112,40 @@
             <div class="grid mb-6 md:gap-6 gap-2 grid-cols-2">
                 <div>
                     <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do cliente</label>
-                    <input type="text" id="nome" name="nome" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="text" id="nome" name="nome" value="<?php echo isset($_POST['nome']) ? $_POST['nome'] : ''; ?>" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div>
                     <label for="numero" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Número de telefone</label>
-                    <input type="text" id="numero" name="numero" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="text" id="numero" name="numero" value="<?php echo isset($_POST['numero']) ? $_POST['numero'] : ''; ?>" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
             </div>
             <div class="grid mb-6 md:gap-6 gap-2 md:grid-cols-3 grid-cols-2">
                 <div>
                     <label for="pago" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor pago pelo cliente</label>
-                    <input type="text" id="pago" name="pago" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="text" id="pago" name="pago" value="<?php echo isset($_POST['pago']) ? $_POST['pago'] : ''; ?>" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div>
                     <label for="valorTotal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor cobrado</label>
-                    <input type="text" id="valorTotal" name="valorTotal" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="text" id="valorTotal" name="valorTotal" value="<?php echo isset($_POST['valorTotal']) ? $_POST['valorTotal'] : ''; ?>" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
                 <div>
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecione o Status</label>
                     <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="PENDENTE">Pendente</option>
-                        <option value="CONFIRMADA">Confirmada</option>
+                        <option value="PENDENTE" <?php if (isset($_POST['status']) && $_POST['status'] == 'PENDENTE') echo 'selected'; ?>>Pendente</option>
+                        <option value="CONFIRMADO" <?php if (isset($_POST['status']) && $_POST['status'] == 'CONFIRMADO') echo 'selected'; ?>>Confirmada</option>
                     </select>
                 </div>
             </div>
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enviar</button>
+
+            <?php if (isset($errors)) : ?>
+                <ul>
+                    <?php foreach ($errors as $error) : ?>
+                        <li class="text-red-500"><?php echo $error; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </form>
     </div>
 
@@ -106,34 +156,3 @@
 </body>
 
 </html>
-
-<?php 
-
-require_once '../MODEL/reserva.php';
-require_once '../BLL/ReservaBLL.php';
-require_once '../ENUM/ReservaStatus.php';
-
-use MODEL\Reserva;
-use BLL\ReservaBLL;
-use Enum\ReservaStatus;
-
-    if($_POST['status'] == ReservaStatus::CONFIRMADO){
-        $status = new ReservaStatus('CONFIRMADO');
-    }
-    if($_POST['status'] == ReservaStatus::PENDENTE){
-        $status = new ReservaStatus('PENDENTE');
-    }
-
-
-    $reserva = new Reserva();
-    $reserva->setNome($_POST['nome']);
-    $reserva->setNumero($_POST['numero']);
-    $reserva->setPago($_POST['pago']);
-    $reserva->setTotalPagar($_POST['valorTotal']);
-    $reserva->setStatus($status);
-
-
-    $bll = new ReservaBLL();
-    $bll->inserir($reserva);
-
-?>
