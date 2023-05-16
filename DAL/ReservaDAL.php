@@ -59,6 +59,41 @@ class ReservaDAL {
         return $resultado; 
     }
 
+    public function buscar(int $id) {
+        $sql = "select * from reserva where id=?;";
+
+        $pdo = Conexao::conectar(); 
+        $query = $pdo->prepare($sql);
+
+        $query->execute(array($id));
+        $resultado = $query->fetch(\PDO::FETCH_ASSOC);
+
+        if(!$resultado){
+            header("Location: lista.php");
+            exit;
+        }
+
+        Conexao::desconectar(); 
+
+        $reserva = new Reserva(); 
+
+        
+
+        $reserva->setId($resultado['id']);
+        $reserva->setNome($resultado['nome']); 
+        $reserva->setNumero($resultado['numero']); 
+        $reserva->setPago($resultado['pago']); 
+        $reserva->setTotalPagar($resultado['totalPagar']); 
+        $reserva->setStatus(new ReservaStatus($resultado['status']));
+        $reserva->setDescricao($resultado['descricao']); 
+        $reserva->setPrimeiroDia($resultado['primeiroDia']); 
+        $reserva->setUltimoDia($resultado['ultimoDia']); 
+
+        return $reserva; 
+    }
+
+
+
     public function editar(){
 
     }

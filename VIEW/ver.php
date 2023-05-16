@@ -5,10 +5,13 @@ require_once '../BLL/ReservaBLL.php';
 use BLL\ReservaBLL;
 use Enum\ReservaStatus;
 
+$id = $_GET['id'];
 
 $bll = new ReservaBLL();
 
-$reservas = $bll->listar();
+$reserva = $bll->buscar($id);
+
+
 
 
 ?>
@@ -21,7 +24,7 @@ $reservas = $bll->listar();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Reservas</title>
+    <title>Reserva de <?php echo $reserva->getNome(); ?></title>
     <link rel="icon" type="image/png" href="/image/piscina.png" />
 
 
@@ -70,7 +73,7 @@ $reservas = $bll->listar();
                 </div>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="../VIEW/lista.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Inicio</a>
+                        <a href="../VIEW/lista.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Inicio</a>
                     </li>
                     <li>
                         <a href="../VIEW/criar.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Adicionar</a>
@@ -81,66 +84,69 @@ $reservas = $bll->listar();
     </nav>
 
 
+    <div class="flex justify-center mt-14 h-screen p-2">
+        <div>
+            <div class="grid mb-6 grid-cols-2 items-center">
+                <div>
+                    <h1 class="block text-2xl font-medium text-gray-900 dark:text-white">
+                        <?php echo $reserva->getNome();  ?>
+                    </h1>
+                </div>
+                <div>
+                    <a href="<?php echo $reserva->getNumeroLink();  ?>" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <?php echo $reserva->getNumero();  ?>
+                    </a>
+                </div>
+            </div>
+            <div class="grid mb-6 md:gap-6 gap-2 md:grid-cols-3 grid-cols-2">
+                <div>
+                    <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
+                        <span class="font-medium">Valor pago pelo cliente: </span><?php echo $reserva->getPago();  ?>
+                    </h1>
+                </div>
+                <div>
+                    <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
+                        <span class="font-medium">Valor cobrado: </span><?php echo $reserva->getTotalPagar();  ?>
+                    </h1>
+                </div>
 
-    <?php if ($reservas) : ?>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14 mx-4 px-4 ">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th class="px-6 py-3">
-                            Nome
-                        </th>
-                        <th class="px-6 py-3">
-                            Numero
-                        </th>
-                        <th class="px-6 py-3">
-                            Pago / Cobrado
-                        </th>
-                        <th class="px-6 py-3">
-                            Datas
-                        </th>
-                        <th class="px-6 py-3">
-                            Status
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($reservas as $reserva) : ?>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $reserva->getId(); ?>">
-                                    <?php echo $reserva->getNome();?> 
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="<?php echo $reserva->getNumeroLink(); ?>" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <?php echo $reserva->getNumero(); ?>
-                                </a>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <?php echo "{$reserva->getPago()} / {$reserva->getTotalPagar()}"; ?>
-                            </td>
-                            <td class="px-6 py-4">
-                                <?php echo "{$reserva->getPrimeiroDiaF()} <br> {$reserva->getUltimoDiaF()}"; ?>
-                            </td>
-                            <td class="px-6 py-4 font-semibold 
+                <div>
+                    <h1 class="block mb-2 text-base font-medium 
                                 <?php if ($reserva->getStatus()->getValue() == ReservaStatus::CANCELADO) echo 'text-red-600';
                                 if ($reserva->getStatus()->getValue() == ReservaStatus::PENDENTE) echo 'text-yellow-500';
                                 if ($reserva->getStatus()->getValue() == ReservaStatus::CONFIRMADO) echo 'text-green-600'; ?>">
-                                <?php echo $reserva->getStatus()->getValue(); ?>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        </div>
-    <?php else : ?>
-        <div class="flex justify-center mt-14 font-semibold">
-            Nenhuma reserva encontrada :(
-        </div>
-    <?php endif ?>
+                        <span class="text-gray-900 dark:text-white">Status: </span><?php echo $reserva->getStatus()->getValue(); ?>
+                    </h1>
+                </div>
+            </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+            <div class="mb-6">
+                <div class="grid mb-6 md:gap-6 gap-2 grid-cols-2">
+                    <div>
+                        <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
+                            <span class="font-medium"> Primeiro dia: </span><?php echo $reserva->getPrimeiroDiaF() ?>
+                        </h1>
+                    </div>
+                    <div>
+                        <?php if ($reserva->getUltimoDia()) : ?>
+                            <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
+                                <span class="font-medium">Ultimo dia :</span><?php echo $reserva->getUltimoDiaF(); ?>
+                            </h1>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label for="descricao" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Descrição</label>
+                <textarea id="descricao" rows="4" disabled class="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $reserva->getDescricao() ? $reserva->getDescricao() : ''; ?></textarea>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 </body>
 

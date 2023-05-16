@@ -24,6 +24,11 @@ class ReservaBLL
         return $this->reservaDAL->listar();
     }
 
+    public function buscar(int $id)
+    {
+        return $this->reservaDAL->buscar($id);
+    }
+
 
     public function inserir(Reserva $reserva)
     {

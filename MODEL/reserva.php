@@ -117,7 +117,7 @@ class Reserva {
 
     
 
-    public function getUltimoDia() : string
+    public function getUltimoDia() : string|null
     {
         return $this->ultimoDia;
     }
