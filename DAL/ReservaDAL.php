@@ -46,8 +46,11 @@ class ReservaDAL {
 
     public function inserir(Reserva $reserva){
         $conexao = Conexao::conectar(); 
+        $ultimoDia = $reserva->getUltimoDia() ? "'{$reserva->getUltimoDia()}'" : "NULL";
+
         $sql = "INSERT INTO `reserva` (`nome`, `numero`, `pago`, `totalPagar`, `status`, `descricao`, `primeiroDia`, `ultimoDia`) 
-        VALUES ('{$reserva->getNome()}', {$reserva->getNumero()}, {$reserva->getPago()}, {$reserva->getTotalPagar()}, '{$reserva->getStatus()->getValue()}', '{$reserva->getDescricao()}', '{$reserva->getPrimeiroDia()}', '{$reserva->getUltimoDia()}')";
+        VALUES ('{$reserva->getNome()}', {$reserva->getNumero()}, {$reserva->getPago()}, {$reserva->getTotalPagar()}, '{$reserva->getStatus()->getValue()}', '{$reserva->getDescricao()}', '{$reserva->getPrimeiroDia()}', {$ultimoDia})";
+
      
         $resultado = $conexao->query($sql); 
 
@@ -66,6 +69,3 @@ class ReservaDAL {
 
 
 };
-
-
-?>
