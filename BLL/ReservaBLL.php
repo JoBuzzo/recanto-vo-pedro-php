@@ -80,6 +80,11 @@ class ReservaBLL
         $this->reservaDAL->inserir($reserva);
     }
 
+    public function editar(Reserva $reserva)
+    {
+        $this->reservaDAL->editar($reserva);
+    }
+    
     public function existeReservaComPrimeiroDia($primeiroDia)
     {
         $query = "SELECT COUNT(*) FROM reserva WHERE primeiroDia = :primeiroDia OR ultimoDia = :primeiroDia";

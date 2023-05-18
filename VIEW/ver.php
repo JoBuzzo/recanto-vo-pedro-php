@@ -86,7 +86,7 @@ $reserva = $bll->buscar($id);
 
     <div class="flex justify-center mt-14 h-screen p-2">
         <div>
-            <div class="grid mb-6 grid-cols-2 items-center">
+            <div class="grid mb-6 grid-cols-4 items-center">
                 <div>
                     <h1 class="block text-2xl font-medium text-gray-900 dark:text-white">
                         <?php echo $reserva->getNome();  ?>
@@ -95,6 +95,12 @@ $reserva = $bll->buscar($id);
                 <div>
                     <a href="<?php echo $reserva->getNumeroLink();  ?>" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         <?php echo $reserva->getNumero();  ?>
+                    </a>
+                </div>
+
+                <div>
+                    <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $reserva->getId(); ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        Editar
                     </a>
                 </div>
             </div>

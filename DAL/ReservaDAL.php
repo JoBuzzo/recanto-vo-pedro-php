@@ -11,18 +11,19 @@ use \Model\Reserva;
 use DAL\Conexao;
 use \Enum\ReservaStatus;
 
-class ReservaDAL {
+class ReservaDAL
+{
 
     public function listar()
-     {
+    {
         $conexao = Conexao::conectar();
         $sql = "SELECT * FROM `reserva` ORDER BY primeiroDia;";
-        
+
         $resultado = $conexao->query($sql);
 
         $conexao = Conexao::desconectar();
 
-        foreach($resultado as $r){
+        foreach ($resultado as $r) {
             $reserva = new Reserva;
             $reserva->setId($r['id']);
             $reserva->setNome($r['nome']);
@@ -39,68 +40,80 @@ class ReservaDAL {
 
         if (isset($listaReservas)) {
             return $listaReservas;
-        }else {
+        } else {
             return array();
         }
     }
 
-    public function inserir(Reserva $reserva){
-        $conexao = Conexao::conectar(); 
+    public function inserir(Reserva $reserva)
+    {
+        $conexao = Conexao::conectar();
         $ultimoDia = $reserva->getUltimoDia() ? "'{$reserva->getUltimoDia()}'" : "NULL";
 
         $sql = "INSERT INTO `reserva` (`nome`, `numero`, `pago`, `totalPagar`, `status`, `descricao`, `primeiroDia`, `ultimoDia`) 
         VALUES ('{$reserva->getNome()}', {$reserva->getNumero()}, {$reserva->getPago()}, {$reserva->getTotalPagar()}, '{$reserva->getStatus()->getValue()}', '{$reserva->getDescricao()}', '{$reserva->getPrimeiroDia()}', {$ultimoDia})";
 
-     
-        $resultado = $conexao->query($sql); 
+
+        $resultado = $conexao->query($sql);
 
         $conexao = Conexao::desconectar();
 
-        return $resultado; 
+        return $resultado;
     }
 
-    public function buscar(int $id) {
+    public function buscar(int $id)
+    {
         $sql = "select * from reserva where id=?;";
 
-        $pdo = Conexao::conectar(); 
+        $pdo = Conexao::conectar();
         $query = $pdo->prepare($sql);
 
         $query->execute(array($id));
         $resultado = $query->fetch(\PDO::FETCH_ASSOC);
 
-        if(!$resultado){
+        if (!$resultado) {
             header("Location: lista.php");
             exit;
         }
 
-        Conexao::desconectar(); 
+        Conexao::desconectar();
 
-        $reserva = new Reserva(); 
-
-        
+        $reserva = new Reserva();
 
         $reserva->setId($resultado['id']);
-        $reserva->setNome($resultado['nome']); 
-        $reserva->setNumero($resultado['numero']); 
-        $reserva->setPago($resultado['pago']); 
-        $reserva->setTotalPagar($resultado['totalPagar']); 
+        $reserva->setNome($resultado['nome']);
+        $reserva->setNumero($resultado['numero']);
+        $reserva->setPago($resultado['pago']);
+        $reserva->setTotalPagar($resultado['totalPagar']);
         $reserva->setStatus(new ReservaStatus($resultado['status']));
-        $reserva->setDescricao($resultado['descricao']); 
-        $reserva->setPrimeiroDia($resultado['primeiroDia']); 
-        $reserva->setUltimoDia($resultado['ultimoDia']); 
+        $reserva->setDescricao($resultado['descricao']);
+        $reserva->setPrimeiroDia($resultado['primeiroDia']);
+        $reserva->setUltimoDia($resultado['ultimoDia']);
 
-        return $reserva; 
+        return $reserva;
     }
 
 
 
-    public function editar(){
+    public function editar(Reserva $reserva)
+    {
+        $sql = "UPDATE reserva SET nome=?, numero=?, pago=?, totalPagar=?, status=?, descricao=?, primeiroDia=?, ultimoDia=? WHERE id=?";
+
+        $pdo = Conexao::conectar();
+        $ultimoDia = $reserva->getUltimoDia() ? "{$reserva->getUltimoDia()}" : NULL;
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $query = $pdo->prepare($sql);
+
+        $resultado = $query->execute(array($reserva->getNome(), $reserva->getNumero(), $reserva->getPago(), $reserva->getTotalPagar(),$reserva->getStatus()->getValue(),
+        $reserva->getDescricao(), $reserva->getPrimeiroDia(), $ultimoDia, $reserva->getId()));
+
+        $con = Conexao::desconectar();
+
+        return $resultado;
 
     }
 
-    public function deletar(){
-
+    public function deletar()
+    {
     }
-
-
 };
