@@ -3,10 +3,10 @@
 namespace DAL;
 
 class Conexao{
-    private static $dbNome='epiz_34221086_piscina'; 
-    private static $dbHost = 'sql309.epizy.com';
-    private static $dbUsuario = 'epiz_34221086'; 
-    private static $dbSenha = 'vbCku07t3g1a9';   
+    private static $dbNome='piscina'; 
+    private static $dbHost = 'localhost';
+    private static $dbUsuario = 'root'; 
+    private static $dbSenha = '';  
 
     private static $cont = null; 
 
