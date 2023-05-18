@@ -20,4 +20,4 @@
 // $reservaBLL = new ReservaBLL();
 // $reservaBLL->inserir($reserva);
 
-echo "<a href='VIEW/criar.php'>Adicionar</a>";
+header("location: lista.php");
