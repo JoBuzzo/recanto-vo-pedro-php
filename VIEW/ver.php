@@ -10,10 +10,6 @@ $id = $_GET['id'];
 $bll = new ReservaBLL();
 
 $reserva = $bll->buscar($id);
-
-
-
-
 ?>
 
 
@@ -73,7 +69,7 @@ $reserva = $bll->buscar($id);
                 </div>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="../VIEW/lista.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Inicio</a>
+                        <a href="../VIEW/lista.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Reservas</a>
                     </li>
                     <li>
                         <a href="../VIEW/criar.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Adicionar</a>
@@ -84,9 +80,17 @@ $reserva = $bll->buscar($id);
     </nav>
 
 
-    <div class="flex justify-center mt-14 h-screen p-2">
+    <div class="flex justify-center mt-14 h-screen p-4">
         <div>
-            <div class="grid mb-6 grid-cols-4 items-center">
+            <div class="space-x-2 mb-6">
+                <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $reserva->getId(); ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
+                    Editar
+                </a>
+                <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $reserva->getId(); ?>" class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
+                    Deletar
+                </a>
+            </div>
+            <div class="md:flex md:justify-between md:space-x-8 mb-6">
                 <div>
                     <h1 class="block text-2xl font-medium text-gray-900 dark:text-white">
                         <?php echo $reserva->getNome();  ?>
@@ -98,13 +102,8 @@ $reserva = $bll->buscar($id);
                     </a>
                 </div>
 
-                <div>
-                    <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $reserva->getId(); ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        Editar
-                    </a>
-                </div>
             </div>
-            <div class="grid mb-6 md:gap-6 gap-2 md:grid-cols-3 grid-cols-2">
+            <div class="md:flex md:justify-between md:space-x-8 mb-6">
                 <div>
                     <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
                         <span class="font-medium">Valor pago pelo cliente: </span><?php echo $reserva->getPago();  ?>
@@ -120,7 +119,7 @@ $reserva = $bll->buscar($id);
                     <h1 class="block mb-2 text-base font-medium 
                                 <?php if ($reserva->getStatus()->getValue() == ReservaStatus::CANCELADO) echo 'text-red-600';
                                 if ($reserva->getStatus()->getValue() == ReservaStatus::PENDENTE) echo 'text-yellow-500';
-                                if ($reserva->getStatus()->getValue() == ReservaStatus::CONFIRMADO) echo 'text-green-600'; ?>">
+                                if ($reserva->getStatus()->getValue() == ReservaStatus::CONFIRMADO) echo 'text-green-400'; ?>">
                         <span class="text-gray-900 dark:text-white">Status: </span><?php echo $reserva->getStatus()->getValue(); ?>
                     </h1>
                 </div>
@@ -129,13 +128,13 @@ $reserva = $bll->buscar($id);
             <div class="mb-6">
                 <div class="grid mb-6 md:gap-6 gap-2 grid-cols-2">
                     <div>
-                        <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
+                        <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white whitespace-nowrap">
                             <span class="font-medium"> Primeiro dia: </span><?php echo $reserva->getPrimeiroDiaF() ?>
                         </h1>
                     </div>
                     <div>
                         <?php if ($reserva->getUltimoDia()) : ?>
-                            <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
+                            <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white whitespace-nowrap">
                                 <span class="font-medium">Ultimo dia :</span><?php echo $reserva->getUltimoDiaF(); ?>
                             </h1>
                         <?php endif ?>

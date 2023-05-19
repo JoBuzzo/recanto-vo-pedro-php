@@ -10,7 +10,6 @@ $bll = new ReservaBLL();
 
 $reservas = $bll->listar();
 
-
 ?>
 
 
@@ -70,7 +69,7 @@ $reservas = $bll->listar();
                 </div>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="../VIEW/lista.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Inicio</a>
+                        <a href="../VIEW/lista.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Reservas</a>
                     </li>
                     <li>
                         <a href="../VIEW/criar.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Adicionar</a>
@@ -83,7 +82,7 @@ $reservas = $bll->listar();
 
 
     <?php if ($reservas) : ?>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14 mx-4 px-4 ">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14 mx-4">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -126,7 +125,7 @@ $reservas = $bll->listar();
                             <td class="px-6 py-4 font-semibold 
                                 <?php if ($reserva->getStatus()->getValue() == ReservaStatus::CANCELADO) echo 'text-red-600';
                                 if ($reserva->getStatus()->getValue() == ReservaStatus::PENDENTE) echo 'text-yellow-500';
-                                if ($reserva->getStatus()->getValue() == ReservaStatus::CONFIRMADO) echo 'text-green-600'; ?>">
+                                if ($reserva->getStatus()->getValue() == ReservaStatus::CONFIRMADO) echo 'text-green-400'; ?>">
                                 <?php echo $reserva->getStatus()->getValue(); ?>
                             </td>
                         </tr>
