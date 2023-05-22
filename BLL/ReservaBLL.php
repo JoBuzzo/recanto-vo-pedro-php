@@ -129,6 +129,10 @@ class ReservaBLL
         $this->reservaDAL->editar($reserva);
     }
 
+    public function deletar(int $id)
+    {
+        $this->reservaDAL->deletar($id);
+    }
 
     public function existeReservaComPrimeiroDia($primeiroDia, $reservaId = null)
     {

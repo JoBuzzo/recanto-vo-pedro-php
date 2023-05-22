@@ -10,6 +10,18 @@ $id = $_GET['id'];
 $bll = new ReservaBLL();
 
 $reserva = $bll->buscar($id);
+
+
+
+
+
+
+if(isset($_POST['id'])){
+    $id = $_POST['id'];
+    $bll->deletar($id);
+
+    header("location: lista.php");
+}
 ?>
 
 
@@ -82,13 +94,16 @@ $reserva = $bll->buscar($id);
 
     <div class="flex justify-center mt-14 h-screen p-4">
         <div>
-            <div class="space-x-2 mb-6">
+            <div class="flex space-x-2 mb-6">
                 <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $reserva->getId(); ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
                     Editar
                 </a>
-                <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $reserva->getId(); ?>" class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
-                    Deletar
-                </a>
+                <form action="#" method="POST">
+                    <input type="text" hidden value="<?php echo $reserva->getId(); ?>" name="id">
+                    <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
+                        Deletar
+                    </button>
+                </form>
             </div>
             <div class="md:flex md:justify-between md:space-x-8 mb-6">
                 <div>
@@ -148,10 +163,6 @@ $reserva = $bll->buscar($id);
             </div>
         </div>
     </div>
-
-
-
-
 
 </body>
 
