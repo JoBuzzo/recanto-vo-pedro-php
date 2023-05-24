@@ -2,9 +2,9 @@
 
 namespace DAL;
 
-require_once '../DAL/conexao.php';
-include_once '../MODEL/reserva.php';
-require_once '../ENUM/ReservaStatus.php';
+require_once '../../DAL/conexao.php';
+include_once '../../MODEL/reserva.php';
+require_once '../../ENUM/ReservaStatus.php';
 
 
 use \Model\Reserva;

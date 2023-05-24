@@ -13,3 +13,11 @@ CREATE TABLE reserva (
     ultimoDia DATE UNIQUE NULL
 );
 
+
+CREATE TABLE produto(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    valor FLOAT NOT NULL,
+    estoque INT NOT NULL,
+);
+
