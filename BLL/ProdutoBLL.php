@@ -17,6 +17,11 @@ class ProdutoBLL
         $this->produtoDAL = new ProdutoDAL();
     }
 
+    public function listar()
+    {
+        return $this->produtoDAL->listar();
+    }
+
     public function inserir(Produto $produto)
     {
         $errors = [];

@@ -25,6 +25,32 @@ class ProdutoDAL{
 
         return $resultado;
     }
+
+    public function listar()
+    {
+        $conexao = Conexao::conectar();
+        $sql = "SELECT * FROM `produto`;";
+
+        $resultado = $conexao->query($sql);
+
+        $conexao = Conexao::desconectar();
+
+        foreach ($resultado as $r) {
+            $produto = new Produto;
+            $produto->setId($r['id']);
+            $produto->setNome($r['nome']);
+            $produto->setValor($r['valor']);
+            $produto->setEstoque($r['estoque']);
+
+            $listaProdutos[] = $produto;
+        }
+
+        if (isset($listaProdutos)) {
+            return $listaProdutos;
+        } else {
+            return array();
+        }
+    }
 };
 
 ?>
