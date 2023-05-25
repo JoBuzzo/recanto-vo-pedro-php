@@ -26,6 +26,19 @@ class ProdutoDAL{
         return $resultado;
     }
 
+    public function editar(Produto $produto)
+    {
+        $sql = "UPDATE produto SET nome=?, valor=?, estoque=? WHERE id=?";
+        $pdo = Conexao::conectar();
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $query = $pdo->prepare($sql);
+        $resultado = $query->execute(array($produto->getNome(), $produto->getValor(), $produto->getEstoque(), $produto->getId()));
+
+        $con = Conexao::desconectar();
+
+        return $resultado;
+
+    }
     public function listar()
     {
         $conexao = Conexao::conectar();
