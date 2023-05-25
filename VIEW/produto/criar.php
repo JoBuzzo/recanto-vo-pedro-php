@@ -39,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="icon" type="image/png" href="/image/piscina.png" />
 
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <?php include_once "../includes/head.php"; ?>
+
 </head>
 
-<body>
+<body class="bg-gray-50 dark:bg-gray-900">
     
     <?php include_once "../components/navbar.php"; ?>
 
@@ -77,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
         </form>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
+    <?php include_once "../includes/body.php"; ?>
 
 </body>
 
