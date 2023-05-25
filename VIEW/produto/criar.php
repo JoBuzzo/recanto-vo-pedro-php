@@ -18,7 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $produto->setEstoque($_POST['estoque']);
 
         $bll->inserir($produto);
-    } catch (\PDOException $e) {
+
+        header("location: lista.php");
+
+    } catch (Exception $e) {
+        $errors = explode("\n", $e->getMessage());
     }
 }
 
@@ -48,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="POST">
             <div class="mb-6">
                 <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do Produto</label>
-                <textarea id="nome" name="nome" placeholder="Digite aqui informações adicionais do produto por exemplo: nome, marca ..." rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo isset($_POST['nome']) ? $_POST['nome'] : ''; ?></textarea>
+                <textarea id="nome" name="nome" placeholder="Digite aqui informações adicionais do produto por exemplo: nome, marca ..." rows="4"  required class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo isset($_POST['nome']) ? $_POST['nome'] : ''; ?></textarea>
             </div>
             <div class="grid mb-6 md:gap-6 gap-2 grid-cols-2">
                 <div>
