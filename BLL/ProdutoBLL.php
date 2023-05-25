@@ -22,6 +22,11 @@ class ProdutoBLL
         return $this->produtoDAL->listar();
     }
 
+    public function buscar(int $id)
+    {
+        return $this->produtoDAL->buscar($id);
+    }
+    
     public function inserir(Produto $produto)
     {
         $errors = [];

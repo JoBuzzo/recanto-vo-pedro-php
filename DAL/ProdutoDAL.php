@@ -51,6 +51,33 @@ class ProdutoDAL{
             return array();
         }
     }
+
+    public function buscar(int $id)
+    {
+        $sql = "select * from produto where id=?;";
+
+        $pdo = Conexao::conectar();
+        $query = $pdo->prepare($sql);
+
+        $query->execute(array($id));
+        $resultado = $query->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$resultado) {
+            header("Location: lista.php");
+            exit;
+        }
+
+        Conexao::desconectar();
+
+        $produto = new Produto();
+
+        $produto->setId($resultado['id']);
+        $produto->setNome($resultado['nome']);
+        $produto->setValor($resultado['valor']);
+        $produto->setEstoque($resultado['estoque']);
+
+        return $produto;
+    }
 };
 
 ?>
