@@ -11,12 +11,12 @@ $bll = new ProdutoBLL();
 $produto = $bll->buscar($id);
 
 
-// if(isset($_POST['id'])){
-//     $id = $_POST['id'];
-//     $bll->deletar($id);
+if(isset($_POST['id'])){
+    $id = $_POST['id'];
+    $bll->deletar($id);
 
-//     header("location: lista.php");
-// }
+    header("location: lista.php");
+}
 ?>
 
 

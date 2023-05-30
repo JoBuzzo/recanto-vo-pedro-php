@@ -91,6 +91,21 @@ class ProdutoDAL{
 
         return $produto;
     }
+
+    public function deletar(int $id)
+    {
+        $sql = "DELETE FROM produto WHERE id=?;";
+
+        $pdo = Conexao::conectar();
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); 
+        $query = $pdo->prepare($sql);
+        
+        $resultado = $query->execute(array($id));
+
+        $con = Conexao::desconectar();
+
+        return $resultado;
+    }
 };
 
 ?>

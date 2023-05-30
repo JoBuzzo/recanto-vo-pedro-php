@@ -53,6 +53,11 @@ class ProdutoBLL
 
         $this->produtoDAL->inserir($produto);
     }
+
+    public function deletar(int $id)
+    {
+        $this->produtoDAL->deletar($id);
+    }
     public function editar(Produto $produto)
     {
         $errors = [];
