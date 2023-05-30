@@ -2,8 +2,8 @@
 
 namespace BLL;
 
-include_once '../DAL/ReservaDAL.php';
-include_once '../MODEL/reserva.php';
+include_once '../../DAL/ReservaDAL.php';
+include_once '../../MODEL/reserva.php';
 
 use DAL\Conexao;
 use DAL\ReservaDAL;
