@@ -15,7 +15,7 @@ class Reserva {
     private string $descricao;
     private string $primeiroDia;
     private ?string $ultimoDia;
-
+    private array $multas;
 
 
     public function getId(): int {
@@ -135,6 +135,17 @@ class Reserva {
         $this->ultimoDia = $ultimoDia;
     }
 
+
+
+    public function addMulta(Multa $multa): void 
+    {
+        $this->multas[] = $multa;
+    }
+
+    public function getMultas(): array 
+    {
+        return $this->multas;
+    }
 }
 
 ?>

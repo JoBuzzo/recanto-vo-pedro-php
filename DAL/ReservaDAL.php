@@ -4,12 +4,14 @@ namespace DAL;
 
 require_once '../../DAL/conexao.php';
 include_once '../../MODEL/reserva.php';
+include_once '../../MODEL/multa.php';
 require_once '../../ENUM/ReservaStatus.php';
 
 
 use \Model\Reserva;
 use DAL\Conexao;
 use \Enum\ReservaStatus;
+use Model\Multa;
 
 class ReservaDAL
 {
@@ -63,8 +65,7 @@ class ReservaDAL
 
     public function buscar(int $id)
     {
-        $sql = "select * from reserva where id=?;";
-
+        $sql = "SELECT * FROM reserva WHERE id=?;";
         $pdo = Conexao::conectar();
         $query = $pdo->prepare($sql);
 
@@ -75,8 +76,6 @@ class ReservaDAL
             header("Location: lista.php");
             exit;
         }
-
-        Conexao::desconectar();
 
         $reserva = new Reserva();
 
@@ -90,10 +89,25 @@ class ReservaDAL
         $reserva->setPrimeiroDia($resultado['primeiroDia']);
         $reserva->setUltimoDia($resultado['ultimoDia']);
 
+        $sql = "SELECT * FROM multa WHERE id_reserva=?;";
+        $query = $pdo->prepare($sql);
+
+        $query->execute(array($id));
+
+        $multasResultados = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($multasResultados as $multaResultado) {
+            $multa = new Multa();
+            $multa->setId($multaResultado['id']);
+            $multa->setMotivo($multaResultado['motivo']);
+            $multa->setValor($multaResultado['valor']);
+            $multa->setReserva($reserva);
+            $reserva->addMulta($multa);
+        }
+        Conexao::desconectar();
+
         return $reserva;
     }
-
-
 
     public function editar(Reserva $reserva)
     {
@@ -127,4 +141,5 @@ class ReservaDAL
 
         return $resultado;
     }
+
 };

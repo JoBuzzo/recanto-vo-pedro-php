@@ -21,3 +21,12 @@ CREATE TABLE produto(
     estoque INT NOT NULL,
 );
 
+CREATE TABLE multa(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    motivo VARCHAR(255) NOT NULL,
+    valor FLOAT NOT NULL,
+    id_reserva INT,
+    FOREIGN KEY (id_reserva) REFERENCES reserva(id)
+);
+
+
