@@ -40,6 +40,9 @@
                             <li>
                                 <a href="../produto/criar.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produto</a>
                             </li>
+                            <li>
+                                <a href="../multa/criar.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Multa</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
