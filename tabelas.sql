@@ -29,4 +29,10 @@ CREATE TABLE multa(
     FOREIGN KEY (id_reserva) REFERENCES reserva(id)
 );
 
+CREATE TABLE despesa(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(200) NOT NULL,
+    valor FLOAT NOT NULL,
+    data DateTime NOT NULL
+);
 

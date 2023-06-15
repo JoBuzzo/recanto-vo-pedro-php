@@ -51,3 +51,4 @@ class Produto
         return $this->estoque;
     }
 };
+?>
