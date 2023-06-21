@@ -1,44 +1,41 @@
 <?php
 
-require_once '../../BLL/ProdutoBLL.php';
+require_once '../../BLL/DespesaBLL.php';
 
-use Model\Produto;
-use BLL\ProdutoBLL;
+use Model\Despesa;
+use BLL\DespesaBLL;
 
-$bll = new ProdutoBLL();
-
+$bll = new DespesaBLL();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
 
-        $produto = new Produto();
+        $despesa = new Despesa();
 
-        $produto->setNome($_POST['nome']);
-        $produto->setValor($_POST['valor']);
-        $produto->setEstoque($_POST['estoque']);
+        $despesa->setDescricao($_POST['descricao']);
+        $despesa->setValor($_POST['valor']);
+        $despesa->setData($_POST['data']);
 
-        $bll->inserir($produto);
+        
+         $bll->inserir($despesa);
 
-        header("location: lista.php");
-
+         header("location: lista.php");
     } catch (Exception $e) {
         $errors = explode("\n", $e->getMessage());
     }
 }
-
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Produto</title>
+    <title>Adicionar Despesas</title>
     <link rel="icon" type="image/png" href="/image/piscina.png" />
-
 
     <?php include_once "../includes/head.php"; ?>
 
@@ -48,30 +45,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <?php include_once "../components/navbar.php"; ?>
 
-
     <div class="flex justify-center mt-14 h-screen p-2">
         <form method="POST">
             <div class="mb-6">
-                <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome do
-                    Produto</label>
-                <textarea id="nome" name="nome"
-                    placeholder="Digite aqui informações adicionais do produto por exemplo: nome, marca ..." rows="4"
+                <label for="descricao"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrição</label>
+                <textarea id="descricao" name="descricao" placeholder="Digite aqui a descrição de sua despesa " rows="4"
                     required
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo isset($_POST['nome']) ? $_POST['nome'] : ''; ?></textarea>
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo isset($_POST['descricao']) ? $_POST['descricao'] : ''; ?></textarea>
             </div>
+
             <div class="grid mb-6 md:gap-6 gap-2 grid-cols-2">
                 <div>
                     <label for="valor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor da
-                        Unidade</label>
+                        Despesa</label>
                     <input type="text" id="valor" name="valor"
                         value="<?php echo isset($_POST['valor']) ? $_POST['valor'] : ''; ?>" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div>
-                    <label for="estoque" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantia em
-                        estoque</label>
-                    <input type="number" id="estoque" name="estoque"
-                        value="<?php echo isset($_POST['estoque']) ? $_POST['estoque'] : ''; ?>" required
+                    <label for="despesa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data da
+                        Despesa
+                    </label>
+                    <input type="date" id="data" name="data"
+                        value="<?php echo isset($_POST['data']) ? $_POST['data'] : ''; ?>" required
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
             </div>
@@ -91,7 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <?php include_once "../includes/body.php"; ?>
-
 </body>
+
+
 
 </html>

@@ -9,7 +9,7 @@ class  Despesa
     private int $id;
     private string $descricao;
     private float $valor;
-    private DateTime $data;
+    private string $data;
 
 
     public function getId(): int
@@ -42,12 +42,17 @@ class  Despesa
         $this->valor = $valor;
     }
 
-    public function getData(): DateTime
+    public function getData(): string
     {
-        return  $this->data;
+        return $this->data;
     }
 
-    public function setData(DateTime $data)
+    public function getDataF(): string
+    {
+        return  date("d/m/Y", strtotime($this->data));
+    }
+
+    public function setData(string $data)
     {
         $this->data = $data;
     }
