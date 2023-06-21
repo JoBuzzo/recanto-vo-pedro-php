@@ -1,6 +1,6 @@
 <nav class="bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" class="flex items-center">
+        <a href="../reserva/lista.php" class="flex items-center">
             <i class="fas fa-swimming-pool text-xl p-2 dark:text-white"></i>
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Recanto Vô Pedro</span>
         </a>
@@ -32,6 +32,9 @@
                                 <a href="../produto/criar.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produto</a>
                             </li>
                             <li>
+                                <a href="../despesa/criar.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Despesa</a>
+                            </li>
+                            <li>
                                 <a href="../multa/criar.php" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Multa</a>
                             </li>
                         </ul>
@@ -55,7 +58,7 @@
                     ?>">Produtos</a>
                 </li>
                 <li>
-                    <a href="#" class="<?php if(isset($view) && $view == "despesa"){
+                    <a href="../despesa/lista.php" class="<?php if(isset($view) && $view == "despesa"){
                         echo "block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent";
                     }else{
                         echo "block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
