@@ -18,6 +18,11 @@ class MultaBLL
         $this->multaDAL = new MultaDAL();
     }
 
+    public function listar()
+    {
+        return $this->multaDAL->listar();    
+    }
+    
     public function inserir(Multa $multa)
     {
         $errors = [];

@@ -1,5 +1,5 @@
 <?php
 
-header("location: VIEW/lista.php");
+header("location: VIEW/reserva/lista.php");
 
 ?>
