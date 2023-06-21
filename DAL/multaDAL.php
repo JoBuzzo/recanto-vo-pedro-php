@@ -35,9 +35,9 @@ class MultaDAL
             $listaMultas[] = $multa;
         }
 
-        if(isset($listaMultas)){
+        if (isset($listaMultas)) {
             return $listaMultas;
-        }else{
+        } else {
             return array();
         }
     }
@@ -56,6 +56,19 @@ class MultaDAL
         return $resultado;
     }
 
+
+    public function editar(Multa $multa)
+    {
+        $sql = "UPDATE multa SET motivo=?, valor=?, pago=? WHERE id=?";
+        $pdo = Conexao::conectar();
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $query = $pdo->prepare($sql);
+        $resultado = $query->execute(array($multa->getMotivo(), $multa->getValor(), $multa->getPago(), $multa->getId()));
+
+        $con = Conexao::desconectar();
+
+        return $resultado;
+    }
 
     public function buscar(int $id)
     {
