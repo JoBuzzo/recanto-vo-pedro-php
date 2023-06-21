@@ -26,6 +26,15 @@ class ReservaBLL
 
     public function buscar(int $id)
     {
+        $errors = [];
+
+        if($id <= 0){
+            $errors[] = "Selecione alguma opção.";  
+        }
+
+        if (count($errors) > 0) {
+            throw new \Exception(implode("\n", $errors));
+        }
         return $this->reservaDAL->buscar($id);
     }
 

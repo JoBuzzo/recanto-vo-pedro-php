@@ -6,6 +6,7 @@ class Multa{
     private int $id;
     private string $motivo;
     private float $valor;
+    private bool $pago;
     private Reserva $reserva;
 
     public function setId(int $id): void
@@ -36,6 +37,21 @@ class Multa{
     public function getValor(): float
     {
         return $this->valor;
+    }
+
+    public function setPago(bool $pago): void
+    {
+        $this->pago = $pago;
+    }
+
+    public function getPago($view = false): bool|string
+    {
+        if($view && $this->pago){
+            return "Pago";
+        }else if($view){
+            return "Não pago";
+        }
+        return $this->pago;
     }
 
     public function setReserva(Reserva $reserva): void

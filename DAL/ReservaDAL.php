@@ -129,13 +129,13 @@ class ReservaDAL
 
     public function deletar(int $id)
     {
-        $sql = "DELETE FROM reserva WHERE id=?;";
-
         $pdo = Conexao::conectar();
+        $sql = "DELETE FROM multa WHERE id_reserva=?;
+                DELETE FROM reserva WHERE id=?;";
+
         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); 
         $query = $pdo->prepare($sql);
-        
-        $resultado = $query->execute(array($id));
+        $resultado = $query->execute(array($id, $id));
 
         $con = Conexao::desconectar();
 
