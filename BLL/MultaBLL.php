@@ -45,4 +45,9 @@ class MultaBLL
 
         $this->multaDAL->inserir($multa);
     }
+
+    public function buscar(int $id)
+    {
+        return $this->multaDAL->buscar($id);
+    }
 }

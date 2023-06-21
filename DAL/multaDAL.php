@@ -55,4 +55,34 @@ class MultaDAL
 
         return $resultado;
     }
+
+
+    public function buscar(int $id)
+    {
+        $sql = "SELECT * FROM multa WHERE id=?";
+        $pdo = Conexao::conectar();
+        $query = $pdo->prepare($sql);
+
+        $query->execute(array($id));
+        $resultado = $query->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$resultado) {
+            header("Location: lista.php");
+            exit;
+        }
+
+
+        $multa = new Multa();
+        $multa->setId($resultado['id']);
+        $multa->setMotivo($resultado['motivo']);
+        $multa->setValor($resultado['valor']);
+        $multa->setPago($resultado['pago']);
+
+        $reservaDAL = new ReservaDAL();
+        $multa->setReserva($reservaDAL->buscar($resultado['id_reserva']));
+
+        Conexao::desconectar();
+
+        return $multa;
+    }
 };
