@@ -37,4 +37,10 @@ CREATE TABLE despesa(
     data DATE NOT NULL
 );
 
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(10) NOT NULL,
+  `senha` varchar(32) NOT NULL,
+  `email` varchar(50) NOT NULL
+);
 
