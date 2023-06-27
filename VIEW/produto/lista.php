@@ -70,7 +70,7 @@ $produtos = $bll->listar();
         </div>
     <?php else : ?>
         <div class="flex justify-center mt-14 font-semibold dark:text-white">
-            Nenhuma reserva encontrada :(
+            Nenhum produto encontrado :(
         </div>
     <?php endif ?>
 
