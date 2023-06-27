@@ -10,6 +10,6 @@ $bll = new MultaBLL();
 
 $multa = $bll->buscar($id);
 
-// $bll->deletar($id);
+$bll->deletar($id);
 
 header("location: lista.php");

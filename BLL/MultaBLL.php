@@ -70,4 +70,9 @@ class MultaBLL
 
         $this->multaDAL->editar($multa);
     }
+
+    public function deletar(int $id)
+    {
+        $this->multaDAL->deletar($id); 
+    }
 }

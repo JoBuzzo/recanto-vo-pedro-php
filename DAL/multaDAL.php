@@ -98,4 +98,20 @@ class MultaDAL
 
         return $multa;
     }
+
+
+    public function deletar($id)
+    {
+        $sql = "DELETE FROM multa WHERE id=?;";
+
+        $pdo = Conexao::conectar();
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); 
+        $query = $pdo->prepare($sql);
+        
+        $resultado = $query->execute(array($id));
+
+        $con = Conexao::desconectar();
+
+        return $resultado;
+    }
 };
