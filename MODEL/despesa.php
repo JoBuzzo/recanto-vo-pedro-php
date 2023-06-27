@@ -2,7 +2,6 @@
 
 namespace Model;
 
-use DateTime;
 
 class  Despesa
 {

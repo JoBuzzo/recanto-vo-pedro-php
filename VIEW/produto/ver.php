@@ -39,46 +39,6 @@ if(isset($_POST['id'])){
 
     <?php include_once "../components/navbar.php"; ?>
 
-
-
-    <!-- <div class="flex justify-center mt-14 h-screen p-4">
-        <div>
-            <div class="flex space-x-2 mb-6">
-                <a onclick="JavaScript:location.href='editar.php?id=' + <?php echo $produto->getId(); ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
-                    Editar
-                </a>
-                <form action="#" method="POST">
-                    <input type="text" hidden value="<?php echo $produto->getId(); ?>" name="id">
-                    <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
-                        Deletar
-                    </button>
-                </form>
-            </div>
-            <div class="md:flex md:justify-between md:space-x-8 mb-6">
-                <div>
-                    <h1 class="block text-2xl font-medium text-gray-900 dark:text-white">
-                        <?php echo $produto->getNome();  ?>
-                    </h1>
-                </div>
-               
-
-            </div>
-            <div class="md:flex md:justify-between md:space-x-8 mb-6">
-                <div>
-                    <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
-                        <span class="font-medium">Quantia em estoque: </span><?php echo $produto->getEstoque();  ?>
-                    </h1>
-                </div>
-                <div>
-                    <h1 class="block mb-2 text-base font-normal text-gray-900 dark:text-white">
-                        <span class="font-medium">Valor por unidade: </span><?php echo $produto->getValor();  ?>
-                    </h1>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
-
     <div class="flex justify-center items-center w-full mt-8">
         <div class="flex justify-center items-cente md:w-1/2 w-full">
             <div class="p-4 w-full max-w-xl h-full md:h-auto">
