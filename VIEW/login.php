@@ -21,9 +21,6 @@ $objUsuario = new \MODEL\usuario();
 $objUsuario = $bll->SelectUser($usuario);
 
 if ($objUsuario) {
-    //echo "UsuarioDB: " . $objUsuario->getUsuario() . "</br>";
-    //echo "SenhaDB: " . $objUsuario->getSenha() . "</br>" . "</br>";
-    var_dump($objUsuario->getSenha());
     if (md5($senha) == $objUsuario->getSenha()){
         session_start();
         $_SESSION['login'] =  $objUsuario->getUsuario() ;
