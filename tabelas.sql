@@ -38,9 +38,9 @@ CREATE TABLE despesa(
 );
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `usuario` varchar(10) NOT NULL,
-  `senha` varchar(32) NOT NULL,
-  `email` varchar(50) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    `usuario` varchar(10) NOT NULL,
+    `senha` varchar(32) NOT NULL,
+    `email` varchar(50) NOT NULL
 );
 

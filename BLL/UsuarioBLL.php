@@ -1,14 +1,20 @@
 <?php
-    namespace BLL; 
-    use DAL\UsuarioDAL; 
-    include_once 'C:\xampp\htdocs\recanto-vo-pedro-php\DAL\UsuarioDAL.php';
-    
-    class bllUsuario {
-   
-        public function SelectUser (string $usuario){
-            $dal = new  \Dal\dalUsuario(); 
-            //linhas de código com regras de negócio
-           
-            return $dal->SelectUser($usuario);
-        }
+
+namespace BLL;
+include_once '../DAL/UsuarioDAL.php';
+
+
+use DAL\UsuarioDAL;
+
+
+class UsuarioBLL
+{
+
+    public function SelectUser(string $usuario)
+    {
+        $dal = new UsuarioDAL();
+        //linhas de código com regras de negócio
+
+        return $dal->SelectUser($usuario);
     }
+}

@@ -3,13 +3,12 @@ namespace Model;
 
  class Usuario{
 
-    private int $id;
-    private string $email;    
-    private string $senha;
-    private string $usuario; 
+    public int $id;
+    public string $email;    
+    public string $senha;
+    public string $usuario; 
 
-    public function __construct(){
-}
+    public function __construct(){}
 
     public function getId(){
         return $this->id;
@@ -19,12 +18,12 @@ namespace Model;
         return $this->email;
     }
 
-    public function getSenha(){
+    public function getSenha(){ 
         return $this->senha;
     }
 
     public function getUsuario(){   
-        return  $this->usuario; 
+        return $this->usuario; 
     }
      
     public function setId(int $id){

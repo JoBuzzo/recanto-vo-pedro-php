@@ -1,99 +1,47 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-<link href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" rel="stylesheet"
-    id="bootstrap-css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/happily-colored-snlogo/128/medium.png">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Login</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <!-- My CSS -->
-     <link rel="stylesheet" href="../VIEW/css/style.css">
-
-    <!-- jQuery first, then Bootstrap JS. -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script src="mySpxript.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recanto - Login</title>
+    <?php include_once "../VIEW/includes/head.php"; ?>
+    <link rel="icon" type="image/png" href="../image/piscina.png" />
 
 </head>
 
 
-<body>
+<body class="bg-gray-50 dark:bg-gray-900">
 
-    <div class="had-container">
-  
+    <?php include_once "../VIEW/components/navLogin.php"; ?>
 
-        <div class="parallax-container logueo">
-            <div class="parallax"><img src="https://alistapart.com/d/438/fig-6--background-blend-mode.jpg"></div>
-            <div class="row"><br>
-                <div class="col m8 s8 offset-m2 offset-s2 center">
-                    <h4 class="truncate bg-card-user">
-                        <img src="../image/logo.png" alt=""
-                            class="circle responsive-img">
-                        <div class="row login">
-                            <h4>Iniciar Sessão</h4>
-                            <form method="POST" action="login.php" class="col s12">
-                                <div class="row">
-                                    <div class="input-field col m12 s12">
-                                        <i class="material-icons iconis prefix">account_box</i>
-                                        <input id="icon_prefix" type="text" name="usuario" class="validate">
-                                        <label for="icon_prefix">Usuario</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col m12 s12">
-                                        <i class="material-icons iconis prefix">enhanced_encryption</i>
-                                        <input id="password" type="password" name="senha" class="validate">
-                                        <label for="password">Senha</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <button class="btn waves-effect waves-light" type="submit" name="action">Acessar</button>
-                                </div>
-                            </form>
+    <div class="flex justify-center items-center">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:mt-16 lg:py-0 w-full">
+            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-8 space-y-4 md:space-y-6 sm:p-6">
+                    <h1 class="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
+                        Login
+                    </h1>
+                    <form class="space-y-4 md:space-y-8" action="login.php" method="POST">
+                        <div>
+                            <label for="usuario" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome de Usuário</label>
+                            <input type="text" name="usuario" id="usuario" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Seu nome" required>
                         </div>
-                    </h4>
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
+                            <input type="password" name="senha" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        </div>
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full">Entrar</button>
+                    </form>
                 </div>
             </div>
         </div>
+
     </div>
 
-
-    </div> <!-- fin del .container -->
-
-
-
+    <?php include_once "../VIEW/includes/body.php"; ?>
 
 </body>
 
 </html>
-
-<script>
-
-	$(document).ready(function(){
-    		$('.button-collapse').sideNav({
-		      menuWidth: 300, // Default is 300
-		      edge: 'left', // Choose the horizontal origin
-		      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-		      draggable: true, // Choose whether you can drag to open on touch screens,
-		      onOpen: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is opened
-		      onClose: function(el) { /* Do Stuff*/ }, // A function to be called when sideNav is closed
-		    }
-		  );
-      		$('.parallax').parallax();
-    	});
-</script>
