@@ -33,7 +33,7 @@ $despesa = $bll->listar();
 
 
     <?php if ($despesa) : ?>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14 mx-4">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-14 mx-24">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -69,7 +69,7 @@ $despesa = $bll->listar();
             </table>
         </div>
     <?php else : ?>
-        <div class="flex justify-center mt-14 font-semibold">
+        <div class="flex justify-center mt-14 font-semibold dark:text-white">
             Nenhuma despesa encontrada :(
         </div>
     <?php endif ?>
