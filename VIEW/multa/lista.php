@@ -49,7 +49,7 @@ $multas = $bll->listar();
                         <th class="px-6 py-3">
                             Responsavel
                         </th>
-                        <th class="px-6 py-3">
+                        <th colspan="2" class="px-6 py-3">
                             Pago
                         </th>
                     </tr>
@@ -58,9 +58,7 @@ $multas = $bll->listar();
                     <?php foreach ($multas as $multa) : ?>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $multa->getId(); ?>">
-                                    <?php echo $multa->getMotivo(); ?>
-                                </a>
+                                <?php echo $multa->getMotivo(); ?>
                             </td>
                             <td class="px-6 py-4">
                                 <?php echo $multa->getValor(); ?>
@@ -72,6 +70,11 @@ $multas = $bll->listar();
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <?php echo $multa->getPago(true); ?>
+                            </td>
+                            <td>
+                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $multa->getId(); ?>">
+                                    Detalhes
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach ?>

@@ -43,7 +43,7 @@ $produtos = $bll->listar();
                         <th class="py-3">
                             Quantia em estoque
                         </th>
-                        <th class="py-3">
+                        <th colspan="2" class="py-3">
                             Valor por unidade
                         </th>
                     </tr>
@@ -52,9 +52,7 @@ $produtos = $bll->listar();
                     <?php foreach ($produtos as $produto) : ?>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $produto->getId(); ?>">
-                                    <?php echo $produto->getNome(); ?>
-                                </a>
+                                <?php echo $produto->getNome(); ?>
                             </td>
 
                             <td class="px-6 py-4">
@@ -62,6 +60,11 @@ $produtos = $bll->listar();
                             </td>
                             <td class="px-6 py-4">
                                 <?php echo $produto->getValor(); ?>
+                            </td>
+                            <td>
+                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $produto->getId(); ?>">
+                                    Detalhes
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach ?>

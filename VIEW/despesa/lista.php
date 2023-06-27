@@ -43,7 +43,7 @@ $despesa = $bll->listar();
                         <th class="py-3">
                             Data da Despesa
                         </th>
-                        <th class="py-3">
+                        <th colspan="2" class="py-3">
                             Valor da Despesa
                         </th>
                     </tr>
@@ -52,9 +52,7 @@ $despesa = $bll->listar();
                     <?php foreach ($despesa as $despesa) : ?>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $despesa->getId(); ?>">
-                                    <?php echo $despesa->getDescricao(); ?>
-                                </a>
+                                <?php echo $despesa->getDescricao(); ?>
                             </td>
 
                             <td class="px-6 py-4">
@@ -62,6 +60,11 @@ $despesa = $bll->listar();
                             </td>
                             <td class="px-6 py-4">
                                 <?php echo $despesa->getValor(); ?>
+                            </td>
+                            <td>
+                                <a class="font-medium hover:underline cursor-pointer" onclick="JavaScript:location.href='ver.php?id=' + <?php echo $despesa->getId(); ?>">
+                                    Detalhes
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach ?>
